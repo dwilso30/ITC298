@@ -42,7 +42,49 @@ public class TipDB {
                         int version) {
             super(context, name, factory, version);
         }
+       @Override
+        public void onCreate(SQLiteDatabase db) {
+
+            db.execSQL(CREATE_TIP_TABLE);
+
+            db.execSQL("INSERT INTO tip VALUES (1, 0, 42.50, .15)");
+            db.execSQL("INSERT INTO tip VALUES (2, 0, 25.00, .20)");
+
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+
+            Log.d("Tip list", "Upgrading db from version " + oldVersion + " to " + newVersion);
+
+            db.execSQL(TipDB.DROP_TIP_TABLE);
+            onCreate(db);
+        }
+    }
+
+    //database object and database object helper object
+    private SQLiteDatabase db;
+    private DBHelper dbHelper;
+
+    //constructor
+    public TipDB(Context context){
+        dbHelper = new DBHelper(context, DB_NAME, null, DB_VERSION);
 
     }
+
+    //private methods
+    private void openReadableDB() {
+        db = dbHelper.getReadableDatabase();
+    }
+
+    private void openWriteableDB() {
+        db = dbHelper.getWritableDatabase();
+    }
+
+    private void closeDB() {
+        if (db != null)
+            db.close();
+    }
+
 
 }
