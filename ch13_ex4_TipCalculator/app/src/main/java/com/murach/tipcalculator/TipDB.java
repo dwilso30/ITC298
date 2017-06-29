@@ -23,10 +23,10 @@ public class TipDB {
     public static final int BILL_DATE_COL = 1;
 
     public static final String BILL_AMOUNT = "bill_amount";
-    public static final double BILL_AMOUNT_COL = 2;
+    public static final int BILL_AMOUNT_COL = 2;
 
     public static final String TIP_PERCENT = "tip_percent";
-    public static final double TIP_PERCENT_COL = 3;
+    public static final int TIP_PERCENT_COL = 3;
 
 
     public static final String CREATE_TIP_TABLE =
