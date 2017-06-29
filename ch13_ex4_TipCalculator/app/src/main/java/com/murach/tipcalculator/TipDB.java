@@ -85,6 +85,40 @@ public class TipDB {
         if (db != null)
             db.close();
     }
+   
+    public ArrayList<Tip> getTip(int id){
+        String where =
+                TIP_ID + "=?";
+        String[] whereArgs = {Integer.toString(id)};
 
+        this.openReadableDB();
+        Cursor cursor = db.query(TIP_TABLE, null,
+                where, whereArgs, null, null, null);
+        cursor.moveToFrist();
+        Tip tip = getTipFromCursor(cursor);
+        if (cursor !=null)
+            cursor.close();
 
+        return tip;
+    }
+
+    private static Tip getTipFromCursor(Cursor cursor){
+        if(cursor == null || cursor.getCount()==0){
+            return null;
+        }
+        else{
+            try{
+                Tip tip = new Tip(
+                        cursor.getInt(TIP_ID_COL),
+                        cursor.getInt(BILL_DATE_COL),
+                        cursor.getFloat(BILL_AMOUNT_COL),
+                        cursor.getFloat(TIP_PERCENT_COL));
+
+                return tip;
+            }
+            catch(Exception e) {
+                return null;
+            }
+        }
+    }
 }
