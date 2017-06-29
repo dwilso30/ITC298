@@ -6,6 +6,8 @@ package com.murach.tipcalculator;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class TipDB {
 
